@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "fastapi-mongodb-app"
+version = "0.1.0"
+description = ""
+authors = ["mohadese-yousefi <mohadeseyusefi1997@gmail.com>"]
+readme = "README.md"
+packages = [{include = "fastapi_mongodb_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "0.95.0"
+uvicorn = "^0.22.0"
+motor = "^3.2.0"
+passlib = "^1.7.4"
+pyjwt = "^2.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
