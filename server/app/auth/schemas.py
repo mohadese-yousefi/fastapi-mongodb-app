@@ -17,6 +17,6 @@ class Refresh(BaseModel):
 
 
 class TokenPayload(BaseModel):
-    user_name: str
     user_id: str
+    role: str
     exp: int

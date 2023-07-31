@@ -38,5 +38,5 @@ def get_current_user(token: str = Depends(reuseable_oauth)) ->  TokenPayload:
             detail='Could not validate credentials',
         )
     
-    return TokenPayload
+    return token_data 
  
