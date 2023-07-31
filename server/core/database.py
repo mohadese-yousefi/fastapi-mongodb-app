@@ -8,7 +8,7 @@ from server.core.settings import settings
 
 
 client = AsyncIOMotorClient(
-    settings.MONGO_URI, serverSelectionTimeoutMS=10000
+    settings.MONGO_URL, serverSelectionTimeoutMS=10000
 )
 db = client.database
 

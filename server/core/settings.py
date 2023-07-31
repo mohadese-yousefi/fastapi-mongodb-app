@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30
     ALGORITHM: str = 'HS256' #RSASSA-PKCS1-v1_5 using SHA-256
     JWT_SECRET_KEY: str = os.environ.get('JWT_SECRET_KEY', 'template')   # should be kept secret
-    MONGO_URI: str = os.environ.get('MONGO_URL', 'mongodb://flask:flaskpass@127.0.0.1:27017/fastdb?authSource=admin')
+    MONGO_URL: str = os.environ.get('MONGO_URL', 'mongodb://flask:flaskpass@127.0.0.1:27017/fastdb?authSource=admin')
 
 @lru_cache()
 def get_settings():
