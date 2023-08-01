@@ -30,7 +30,6 @@ class User(CreateModel, UserInput):
             values['password'] = get_password_hash(password)
         return values
 
-
 class UserOutput(ResponseModel):
     username: str
     email: str 
@@ -38,3 +37,6 @@ class UserOutput(ResponseModel):
     last_name: str | None
     role: str
     created_at: datetime
+
+class UploaderOutput(BaseModel):
+    file_path: str
