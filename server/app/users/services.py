@@ -5,7 +5,8 @@ from os import fstat
 from minio import Minio
 
 from server.app.users.schemas import UserInput, User
-from server.core.database import PyObjectId, db
+from server.core.database import db
+from server.core.schemas import PyObjectId
 from server.core.settings import settings
 from server.core.exceptions import FileExtentionNotValid
 
@@ -19,7 +20,7 @@ async def create_user(user: UserInput) -> dict | None:
     if await check_username(username=user.username):
         user = User(**user.dict())
         new_user = await db['user'].insert_one(user.dict())
-        created_user = await db['user'].find_one({'_id': new_user.inserted_id})
+        created_user = await db['user'].find_one({'username': user.username})
         return created_user
 
 def upload_file(file) -> dict:

@@ -20,7 +20,6 @@ user_router = APIRouter(prefix='/users')
 @user_router.post(
     '/',
     response_model=UserOutput,
-    response_model_by_alias=False,
     status_code=status.HTTP_201_CREATED,
     responses={
         status.HTTP_409_CONFLICT: {'model': ExceptionModel},

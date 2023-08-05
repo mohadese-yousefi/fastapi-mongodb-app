@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, model_validator
 from enum import Enum
 
 from server.app.auth.services import get_password_hash
@@ -16,15 +16,16 @@ class UserInput(BaseModel):
     username: str
     password: str
     email: str 
-    first_name: str | None
-    last_name: str | None
+    first_name: str = None
+    last_name: str = None
 
 
 class User(CreateModel, UserInput):
     role: str = UserRole.USER.value
     active: bool = True
 
-    @root_validator
+    @model_validator(mode='before')
+    @classmethod
     def password_validator(cls, values) -> dict:
         if password := values.get('password'):
             values['password'] = get_password_hash(password)
@@ -33,8 +34,8 @@ class User(CreateModel, UserInput):
 class UserOutput(ResponseModel):
     username: str
     email: str 
-    first_name: str | None
-    last_name: str | None
+    first_name: str = None
+    last_name: str = None
     role: str
     created_at: datetime
 

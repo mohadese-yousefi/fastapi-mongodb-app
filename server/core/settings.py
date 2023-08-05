@@ -1,6 +1,6 @@
 import os
 from functools import lru_cache
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -14,13 +14,13 @@ class Settings(BaseSettings):
     MONGO_URL: str = os.environ.get('MONGO_URL', 'mongodb://flask:flaskpass@127.0.0.1:27017/fastdb?authSource=admin')
     FILE_WHITE_LIST: list = ['png', 'pdf', 'jpg', 'jpeg', 'svg']
 
-    MINIO_ROOT_USER = os.environ.get('MINIO_ROOT_USER', 'username')
-    MINIO_ROOT_PASSWORD = os.environ.get('MINIO_ROOT_PASSWORD', 'password')
-    MINIO_HOST = os.environ.get('MINIO_HOST', 'localhost')
-    MINIO_PORT = os.environ.get('MINIO_PORT', '9000')
+    MINIO_ROOT_USER: str = os.environ.get('MINIO_ROOT_USER', 'username')
+    MINIO_ROOT_PASSWORD: str = os.environ.get('MINIO_ROOT_PASSWORD', 'password')
+    MINIO_HOST: str = os.environ.get('MINIO_HOST', 'localhost')
+    MINIO_PORT: str = os.environ.get('MINIO_PORT', '9000')
     MINIO_SECURE: bool = os.environ.get('MINIO_SECURE', 'False')
-    MINIO_BUCKET_NAME = os.environ.get('MINIO_BUCKET_NAME', 'my-bucket')
-    MINIO_URI = os.environ.get('MINIO_URL', 'localhost')
+    MINIO_BUCKET_NAME: str = os.environ.get('MINIO_BUCKET_NAME', 'my-bucket')
+    MINIO_URI: str = os.environ.get('MINIO_URL', 'localhost')
 
 @lru_cache()
 def get_settings():

@@ -5,7 +5,8 @@ from passlib.context import CryptContext
 from jwt.exceptions import ExpiredSignatureError, PyJWKError, MissingRequiredClaimError
 import jwt
 
-from server.core.database import PyObjectId, db
+from server.core.schemas import PyObjectId
+from server.core.database import db
 from server.core.settings import settings
 
 
