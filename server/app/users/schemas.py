@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 
 from pydantic import BaseModel, model_validator
 from enum import Enum
@@ -15,7 +15,7 @@ class UserRole(str, Enum):
 class UserInput(BaseModel):
     username: str
     password: str
-    email: str 
+    email: str
     first_name: str = None
     last_name: str = None
 
@@ -31,13 +31,15 @@ class User(CreateModel, UserInput):
             values['password'] = get_password_hash(password)
         return values
 
+
 class UserOutput(ResponseModel):
     username: str
-    email: str 
+    email: str
     first_name: str = None
     last_name: str = None
     role: str
     created_at: datetime
+
 
 class UploaderOutput(BaseModel):
     file_path: str

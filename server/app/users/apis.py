@@ -5,17 +5,18 @@ from server.app.users.schemas import (
     UserInput,
     UserOutput,
     UploaderOutput,
-)
+    )
 from server.app.auth.schemas import TokenPayload
-from server.app.auth.auth import get_current_user
+from server.app.auth.services import get_current_user
 from server.app.users.services import (
     create_user,
     upload_file,
-)
+    )
 from server.core.schemas import ExceptionModel
 
 
 user_router = APIRouter(prefix='/users')
+
 
 @user_router.post(
     '/',
@@ -35,6 +36,7 @@ async def user_create(user: UserInput):
         detail=f'Username {user.username} already exists',
     )
 
+
 @user_router.post(
     '/uploader',
     response_model=UploaderOutput,
@@ -45,13 +47,8 @@ async def user_create(user: UserInput):
     },
 )
 def file_uploader(
-    user: TokenPayload = Depends(get_current_user),
-    file: UploadFile = Form(...)
-    ):
+        user: TokenPayload = Depends(get_current_user),
+        file: UploadFile = Form(...)
+        ):
     if file_path := upload_file(file):
-        return file_path 
-
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f'file is not support',
-    )
+        return file_path

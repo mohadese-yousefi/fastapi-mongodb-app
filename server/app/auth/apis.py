@@ -10,8 +10,8 @@ auth_router = APIRouter(prefix='/auth', tags=['auth'])
 
 
 @auth_router.post(
-    '/token', 
-    response_model=Token, 
+    '/token',
+    response_model=Token,
     responses={401: {'model': ExceptionModel}}
 )
 async def token(credentials: Credentials):

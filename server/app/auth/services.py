@@ -1,14 +1,15 @@
 from datetime import datetime, timedelta, timezone
 
-from fastapi import Depends, status
+from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
-from jwt.exceptions import ExpiredSignatureError, PyJWKError, MissingRequiredClaimError
+from jwt.exceptions import ExpiredSignatureError, PyJWKError, \
+    MissingRequiredClaimError
 import jwt
-from server.app.auth.exception import NotAuthorizedException
 
-from server.core.schemas import PyObjectId
+from server.app.auth.exceptions import NotAuthorizedException
 from server.app.auth.schemas import TokenPayload
+from server.core.schemas import PyObjectId
 from server.core.database import db
 from server.core.settings import settings
 

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any, Annotated, Union
 from bson import ObjectId
 
@@ -13,12 +13,14 @@ def validate_object_id(v: Any) -> ObjectId:
         return ObjectId(v)
     raise ValueError("Invalid ObjectId")
 
+
 PyObjectId = Annotated[
     Union[str, ObjectId],
     AfterValidator(validate_object_id),
     PlainSerializer(lambda x: str(x), return_type=str),
     WithJsonSchema({"type": "string"}, mode="serialization"),
 ]
+
 
 class CreateModel(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
@@ -27,7 +29,7 @@ class CreateModel(BaseModel):
     @model_validator(mode='after')
     def updated_at_validator(self):
         self.updated_at = self.created_at
-        return self 
+        return self
 
 
 class UpdateModel(BaseModel):
